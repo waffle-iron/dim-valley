@@ -1,11 +1,13 @@
 (set-env!
   :dependencies '[[adzerk/boot-cljs          "1.7.228-2"]
                   [adzerk/boot-reload        "0.4.13"]
-                  [hoplon/javelin "3.9.0"]
-                  [hoplon/hoplon             "6.0.0-alpha17"]
+                  [hoplon/javelin            "3.9.0"]
+                  [hoplon/hoplon             "7.0.1"]
                   [org.clojure/clojure       "1.8.0"]
                   [org.clojure/clojurescript "1.9.293"]
-                  [tailrecursion/boot-jetty  "0.1.3"]]
+                  [tailrecursion/boot-jetty  "0.1.3"]
+                  [rm-hull/inkspot "0.2.1"]
+                  [camel-snake-kebab "0.4.0"]]
 
   :source-paths #{"src"}
   :asset-paths  #{"assets"})
@@ -16,7 +18,7 @@
   '[hoplon.boot-hoplon       :refer [hoplon prerender]]
   '[tailrecursion.boot-jetty :refer [serve]])
 
-(let [compiler-options {:foreign-libs [{}]}]
+(let [compiler-options {}]
 
  (deftask front-dev
   "Build for local development."

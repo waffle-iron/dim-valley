@@ -1,5 +1,0 @@
-(page "index.html")
-
-(html
-  (body
-   "Hello world"))
