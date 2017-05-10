@@ -21,11 +21,13 @@
    :rel "stylesheet"
    :type "text/css"))
  (h/body
-  :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops "Ash")) ")")
+  :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops "Day Tripper")) ")")
         :min-height "100vh"}
   (h/div
-   :css {:margin-left "10vw"
-         :margin-top "5vh"}
+   :css {:margin "5vh 0 0 5vw"
+         :padding "5vh 0 5vh 5vw"
+         :background-color "white"
+         :border-radius "20px"}
    (h/h1 "Dim valley pty. ltd.")
    (h/p
     "Lorem ipsum."))))
