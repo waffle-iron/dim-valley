@@ -6,7 +6,7 @@
 
 (h/html
   (h/body
-   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops "Metallic Toad")) ")")
+   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops "Ash")) ")")
          :min-height "100vh"}
    (h/div
     "Hello worldz")))

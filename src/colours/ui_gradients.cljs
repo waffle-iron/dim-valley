@@ -4,7 +4,6 @@
 
 (defn stops
  [name]
- (prn name)
  (let [parse (.-parse js/JSON)]
   (get
    (some->>
@@ -14,7 +13,3 @@
     (filter #(= name (get % "name")))
     first)
    "colors")))
-
-; let [stops (get
-;                                (inkspot.macros/ui-gradients "https://raw.githubusercontent.com/ghosh/uiGradients/master/gradients.json")
-;                                "Metallic Toad")]
