@@ -31,10 +31,14 @@
         :min-height "100vh"}
 
   (menu.flower/menu
-   [{:url "milly.png"}
-    {:url "dave.png"}
-    {:url "octocat.png"}
-    {:text "dim valley"}]
+   (reverse
+    [
+     {:url "milly.png"}
+     {:url "dave.png"}
+     {:url "octocat.png"}
+     {:text "legal"}
+     {:text "blog"}
+     {:text "dim valley pty. ltd."}])
    200)
 
   (layout.middle-right/middle-right
