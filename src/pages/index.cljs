@@ -3,7 +3,8 @@
   colours.ui-gradients
   [hoplon.core :as h]
   hoplon.jquery
-  fonts.google-fonts))
+  fonts.google-fonts
+  layouts.middle-right))
 
 (def gradient-name "Day Tripper")
 (def gradient-stops (colours.ui-gradients/stops gradient-name))
@@ -26,17 +27,20 @@
  (h/body
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " gradient-stops) ")")
         :min-height "100vh"}
-  (h/div
-   :css {:margin "5vh 0 0 5vw"
-         :padding "5vh 0 5vh 5vw"
-         :background-color "white"
-         :border-width "4px"
-         :border-style "dotted"
-         :border-color (first gradient-stops)
-         :border-image-source "url('/border-dots.svg')"
-         :border-image-slice "33% 33%"
-         :border-image-repeat "round"
-         :background-clip "padding-box"}
-   (h/h1 "Dim valley pty. ltd.")
-   (h/p
-    "Lorem ipsum."))))
+
+  (layouts.middle-right/middle-right
+   (h/div
+    :css {
+          :padding "5vh 0 5vh 5vw"
+          :background-color "white"
+          :border-width "4px"
+          :border-style "dotted"
+          :border-color (first gradient-stops)
+          :border-image-source "url('/border-dots.svg')"
+          :border-image-slice "33% 33%"
+          :border-image-repeat "round"
+          :background-clip "padding-box"
+          :border-right "none"}
+    (h/h1 "Dim valley pty. ltd.")
+    (h/p
+     "Lorem ipsum.")))))
