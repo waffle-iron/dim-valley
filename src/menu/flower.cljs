@@ -8,6 +8,8 @@
 
 ; Hoplonified from https://codepen.io/jordanlachance/pen/yOJdRr
 
+(def easing "cubic-bezier(0.175, 0.885, 0.32, 1.275)")
+
 (defn polar->cartesian
  [radius radians]
  [(* radius (.cos js/Math radians))
@@ -27,7 +29,8 @@
 
 (defn open-button
  [open? radius transition-length]
- (let [open? (or open? (j/cell false))]
+ (let [open? (or open? (j/cell false))
+       transition-length (/ transition-length 2)]
   (h/div
    :click #(swap! open? not)
    :css (j/cell= {; We give a couple px buffer to avoid antialiasing artefacts
@@ -97,7 +100,7 @@
        ; Outer radius = (ratio x offset) + offset
        ; Outer radius = (1 + ratio) x offset
        ; offset = Outer radius / (1 + ratio)
-       ratio 0.3
+       ratio 0.4
        offset (j/cell= (/ radius (+ 1 ratio)))
        item-radius (j/cell= (* ratio offset))
 
@@ -109,7 +112,7 @@
                      (polar->cartesian offset (* i radians-per-item))
                      item])
                    items))
-       total-transition-length 0.6
+       total-transition-length 0.4
        base-transition-length (j/cell= (/ total-transition-length (count items)))]
   (outer-wrapper
    0
@@ -150,7 +153,7 @@
                        :left 0
                        :bottom 0
                        :right 0
-                       :transition (str "opacity " total-transition-length "s ease " transition-delay "s")
+                       :transition (str "opacity " total-transition-length "s " easing " " transition-delay "s")
                        :opacity (if open? 0 1)}))
        :css (j/cell= (merge
                       {
@@ -166,7 +169,8 @@
                        :width (* 2 item-radius)
                        :height (* 2 item-radius)
                        :border-radius (n->px item-radius)
-                       :transition (str "transform " total-transition-length "s ease " transition-delay "s")
+                       :border "4px solid"
+                       :transition (str "transform " total-transition-length "s " easing " " transition-delay "s")
                        :cursor "pointer"}
                       {:transform (if open? (str "translate(" x "px, " y "px)")
                                             "translate(0, 0)")})))))))))
