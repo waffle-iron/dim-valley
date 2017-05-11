@@ -32,10 +32,10 @@
   (let [width 100]
    (h/div
     :css {:position "fixed"
-          :top "10vh"
-          :left "5vw"}
+          :top "200px"
+          :left "200px"}
     (menu.flower/menu
-     ["Milly" "Dave" "Dim Valley" "Documents" "Github"]
+     ["A" "B" "C" "D" "E"]
      width)))
 
   (layout.middle-right/middle-right
