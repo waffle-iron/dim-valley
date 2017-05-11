@@ -30,15 +30,9 @@
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " gradient-stops) ")")
         :min-height "100vh"}
 
-  (let [diameter 200]
-   (h/div
-    :css (j/cell= {:position "fixed"
-                   :bottom (str "calc(5vh + " (/ diameter 2) "px)")
-                   :left (str "calc(5vw + " (/ diameter 2) "px")
-                   :overflow "visible"})
-    (menu.flower/menu
-     ["A" "B" "C" "D" "E" "F"]
-     diameter)))
+  (menu.flower/menu
+   (range 8)
+   200)
 
   (layout.middle-right/middle-right
    (h/div

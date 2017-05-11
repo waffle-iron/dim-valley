@@ -12,6 +12,16 @@
 
 (defn n->px [n] (str n "px"))
 
+(defn outer-wrapper
+ [offset outer-radius item-radius & children]
+ (prn outer-radius)
+ (h/div
+  :css (j/cell= {:position "fixed"
+                 :left (n->px outer-radius)
+                 :bottom (n->px outer-radius)
+                 :overflow "visible"})
+  children))
+
 (defn open-button
  [open? radius]
  (let [open? (or open? (j/cell false))]
@@ -19,28 +29,29 @@
    :click #(swap! open? not)
    :css (j/cell= {; We give a couple px buffer to avoid antialiasing artefacts
                   ; when the circles are stacked in the z-axis.
-                  :width (+ radius 2)
-                  :height (+ radius 2)
-                  :background-color "white"
+                  :width (* radius 2)
+                  :height (* radius 2)
                   :border-radius (n->px radius)
                   :position "absolute"
-                  :left "-1px"
-                  :top "-2px"
+                  :left (n->px (- radius))
+                  :bottom (n->px (- radius))
                   :z-index 1
-                  :cursor "pointer"}))))
+                  :cursor "pointer"
+                  :background-color "white"
+                  :opacity 0.1}))))
 
 (defn menu
- [items width]
+ [items radius]
  (let [open? (j/cell false)
-       ; Total width of the element = 2x menu item radius + 2x menu item offset.
-       ; Ratio = menu item radius / menu item offset.
-       ; Width / 2 = radius + offset
-       ; Width / 2 = (ratio x offset) + offset
-       ; Width / 2 = (1 + ratio) x offset
-       ; offset = Width / (2 x (1 + ratio))
-       ratio 0.5
-       offset (j/cell= (/ width (* 2 (+ 1 ratio))))
-       radius (j/cell= (* ratio offset))
+       ; Outer radius of the element = item radius + item offset.
+       ; Ratio = item radius / item offset.
+       ; Outer radius = radius + offset
+       ; Outer radius = (ratio x offset) + offset
+       ; Outer radius = (1 + ratio) x offset
+       ; offset = Outer radius / (1 + ratio)
+       ratio 0.3
+       offset (j/cell= (/ radius (+ 1 ratio)))
+       item-radius (j/cell= (* ratio offset))
 
        radians-per-item (j/cell= (/ (* 2 (.-PI js/Math)) (count items)))
        i-xy-item (j/cell=
@@ -52,22 +63,27 @@
                    items))
        total-transition-length 0.6
        base-transition-length (j/cell= (/ total-transition-length (count items)))]
-  (h/div
-   :css {:position "relative"
-         :z-index 1}
-   (open-button open? radius)
+  (outer-wrapper
+   0
+   radius
+   item-radius
+
+   (h/div
+    :css {:position "relative"
+          :z-index 1}
+    (open-button open? item-radius))
    (h/div
     :css {:z-index 0}
     (h/for-tpl [[i [x y] item] i-xy-item]
      (h/div
       :css (j/cell= (merge
                      {:position "absolute"
-                      :left 0
-                      :top 0
+                      :left (n->px (- item-radius))
+                      :bottom (n->px (- item-radius))
                       :background-color "white"
-                      :width radius
-                      :height radius
-                      :border-radius (n->px radius)
+                      :width (* 2 item-radius)
+                      :height (* 2 item-radius)
+                      :border-radius (n->px item-radius)
                       :transition (let [transition-delay (if open?
                                                           (* i base-transition-length)
                                                           0)]
