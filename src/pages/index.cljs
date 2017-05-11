@@ -8,7 +8,8 @@
   fonts.google-fonts
   layout.config
   layout.spacer
-  layout.middle-right))
+  layout.middle-right
+  menu.flower))
 
 (def gradient-name "Day Tripper")
 (def gradient-stops (colours.ui-gradients/stops gradient-name))
@@ -28,6 +29,15 @@
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " gradient-stops) ")")
         :min-height "100vh"}
 
+  (let [width 100]
+   (h/div
+    :css {:position "fixed"
+          :top "10vh"
+          :left "5vw"}
+    (menu.flower/menu
+     ["Milly" "Dave" "Dim Valley" "Documents" "Github"]
+     width)))
+
   (layout.middle-right/middle-right
    (h/div
     :css {
@@ -42,7 +52,7 @@
           :background-clip "padding-box"
           :border-right "none"}
     (h/div
-     {:css {:width "60vw"}}
+     {:css {:width "cacl(60vw - 4px)"}}
 
      (h/div
       :css (merge
@@ -56,7 +66,7 @@
 
      (h/img
       :src "https://pbs.twimg.com/media/C8DGQUCVYAABgc-.jpg:large"
-      :css {:width "75vw"
+      :css {:width "calc(75vw - 4px)"
             :margin-left "-5vw"})
 
      (h/h2 "User experience research")
