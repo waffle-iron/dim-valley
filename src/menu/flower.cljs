@@ -3,7 +3,8 @@
   [hoplon.core :as h]
   [javelin.core :as j]
   fonts.hoplon
-  fonts.config))
+  fonts.config
+  colours.ui-gradients))
 
 ; Hoplonified from https://codepen.io/jordanlachance/pen/yOJdRr
 
@@ -25,7 +26,7 @@
   children))
 
 (defn open-button
- [open? radius]
+ [open? radius transition-length]
  (let [open? (or open? (j/cell false))]
   (h/div
    :click #(swap! open? not)
@@ -38,9 +39,16 @@
                   :left (n->px (- radius))
                   :bottom (n->px (- radius))
                   :z-index 1
-                  :cursor "pointer"
-                  :background-color "white"
-                  :opacity 0.1}))))
+                  :cursor "pointer"})
+   (h/div
+    :css (j/cell= {:width (/ radius 2)
+                   :height (/ radius 12)
+                   :background-color (last (colours.ui-gradients/stops))
+                   :position "absolute"
+                   :top (n->px (* radius (/ 23 24)))
+                   :left (n->px (* radius (/ 3 4)))
+                   :transform (str "scale(" (if open? 0 1) ")")
+                   :transition (str "transform " transition-length "s ease")})))))
 
 (defn menu
  [items radius]
@@ -73,7 +81,7 @@
    (h/div
     :css {:position "relative"
           :z-index 1}
-    (open-button open? item-radius))
+    (open-button open? item-radius total-transition-length))
    (h/div
     :css {:z-index 0}
     (h/for-tpl [[i [x y] item] i-xy-item]

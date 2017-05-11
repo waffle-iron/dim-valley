@@ -12,9 +12,6 @@
   layout.middle-right
   menu.flower))
 
-(def gradient-name "Day Tripper")
-(def gradient-stops (colours.ui-gradients/stops gradient-name))
-
 (h/html
  (h/head
   (h/link
@@ -27,7 +24,8 @@
    :rel "stylesheet"
    :type "text/css"))
  (h/body
-  :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " gradient-stops) ")")
+  :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops)) ")")
+        :color (last (colours.ui-gradients/stops))
         :min-height "100vh"}
 
   (menu.flower/menu
@@ -48,7 +46,7 @@
           :background-color "white"
           :border-width "4px"
           :border-style "dotted"
-          :border-color (first gradient-stops)
+          :border-color (last (colours.ui-gradients/stops))
           :border-image-source "url('border-dots.svg')"
           :border-image-slice "33% 33%"
           :border-image-repeat "round"
