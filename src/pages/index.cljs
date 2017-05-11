@@ -51,7 +51,7 @@
       (h/h1 "Amelia Schmidt"
        :css {:margin 0
              :font-size "4rem"})
-      (h/span "I believe the modern business consciously develops and evolves their unique model of doing business such that, over time, the needs of the business and customer quite naturally become one and the same."
+      (h/span "I believe the modern business consciously develops and evolves its unique model and way of doing business such that, over time, the needs of the business and customer quite naturally become one and the same."
        :css {:font-size "1rem"}))
 
      (h/img
