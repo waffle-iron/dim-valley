@@ -40,15 +40,53 @@
                   :bottom (n->px (- radius))
                   :z-index 1
                   :cursor "pointer"})
-   (h/div
-    :css (j/cell= {:width (/ radius 2)
-                   :height (/ radius 12)
-                   :background-color (last (colours.ui-gradients/stops))
-                   :position "absolute"
-                   :top (n->px (* radius (/ 23 24)))
-                   :left (n->px (* radius (/ 3 4)))
-                   :transform (str "scale(" (if open? 0 1) ")")
-                   :transition (str "transform " transition-length "s ease")})))))
+
+   (let [width (j/cell= (/ radius 2))
+         ; sin(PI/4) = rotated-offset / width
+         ; rotated-offset = (width x sin(PI /4))
+         rotated-offset (j/cell= (/ (* width
+                                       (.sin js/Math (/ (.-PI js/Math) 4)))
+                                    2))
+         height (j/cell= (/ radius 12))
+         ; rotated-offset (j/cell= (* 2 width))
+         left (j/cell= (+ radius (- (/ width 2))))
+         top (j/cell= (+ radius (- (/ height 2))))
+         color (j/cell= (last (colours.ui-gradients/stops)))
+         default-css (j/cell= {:width (n->px width)
+                               :height (n->px height)
+                               :left (n->px left)
+                               :background-color color
+                               :position "absolute"
+                               :transition (str "transform " transition-length "s ease, "
+                                                "background-color " transition-length "s ease")})]
+    [
+     ; top line
+     (h/div
+      :css (j/cell= (merge
+                     default-css
+                     {:top (n->px (- top (* 2 height)))
+                      :transform (str
+                                      "translate3d(0px, " (if open? rotated-offset 0) "px, 0px)"
+                                      "rotate(" (if open? "45deg" "0deg") ") ")}
+                     (when open? {:background-color "white"}))))
+
+     ; center line
+     (h/div
+      :css (j/cell= (merge
+                     default-css
+                     {
+                      :top (n->px top)
+                      :transform (str "scale(" (if open? 0 1) ")")})))
+
+     ; bottom line
+     (h/div
+      :css (j/cell= (merge
+                     default-css
+                     {:top (n->px (+ top (* 2 height)))
+                      :transform (str
+                                      "translate3d(0px, -" (if open? rotated-offset 0) "px, 0px)"
+                                      "rotate(" (if open? "-45deg" "0deg") ") ")}
+                     (when open? {:background-color "white"}))))]))))
 
 (defn menu
  [items radius]
