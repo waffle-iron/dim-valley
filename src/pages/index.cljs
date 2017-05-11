@@ -49,4 +49,8 @@
 
     (layout.spacer/vertical-spacer)
 
-    (h/h2 "Amelia Schmidt")))))
+    (h/h2 "Amelia Schmidt")
+    (h/blockquote "\"I believe the modern business puts customer needs at the heart of their business model")
+
+    (h/h2 "David Meister")
+    (h/blockquote "\"I believe the modern business is networked, data driven and highly automated")))))
