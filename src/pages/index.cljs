@@ -5,6 +5,9 @@
   hoplon.jquery
   fonts.google-fonts))
 
+(def gradient-name "Day Tripper")
+(def gradient-stops (colours.ui-gradients/stops gradient-name))
+
 (h/html
  (h/head
   (h/link
@@ -21,13 +24,19 @@
    :rel "stylesheet"
    :type "text/css"))
  (h/body
-  :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops "Day Tripper")) ")")
+  :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " gradient-stops) ")")
         :min-height "100vh"}
   (h/div
    :css {:margin "5vh 0 0 5vw"
          :padding "5vh 0 5vh 5vw"
          :background-color "white"
-         :border-radius "20px"}
+         :border-width "5px"
+         :border-style "dotted"
+         :border-color (first gradient-stops)
+         :border-image-source "url('/border-dots.svg')"
+         :border-image-slice "33% 33%"
+         :border-image-repeat "round"
+         :background-clip "padding-box"}
    (h/h1 "Dim valley pty. ltd.")
    (h/p
     "Lorem ipsum."))))
