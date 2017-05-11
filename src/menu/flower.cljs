@@ -1,7 +1,9 @@
 (ns menu.flower
  (:require
   [hoplon.core :as h]
-  [javelin.core :as j]))
+  [javelin.core :as j]
+  fonts.hoplon
+  fonts.config))
 
 ; Hoplonified from https://codepen.io/jordanlachance/pen/yOJdRr
 
@@ -77,8 +79,23 @@
     (h/for-tpl [[i [x y] item] i-xy-item]
      (let [transition-delay (j/cell= (if open?
                                       (* i base-transition-length)
-                                      0))]
+                                      0))
+           url (j/cell= (:url item))
+           text (j/cell= (:text item))]
       (h/div
+       (h/when-tpl text
+        (h/table
+         :css {:position "absolute"
+               :width "100%"
+               :height "100%"}
+         (h/tr
+          (h/td
+           :valign "center"
+           :css (merge
+                 {:text-align "center"}
+                 (fonts.hoplon/font-map->css-map fonts.config/playfair))
+           text))))
+
        (h/div
         :css (j/cell= {
                        :position "absolute"
@@ -89,14 +106,13 @@
                        :right 0
                        :transition (str "opacity " total-transition-length "s ease " transition-delay "s")
                        :opacity (if open? 0 1)}))
-
        :css (j/cell= (merge
                       {
                        :position "absolute"
                        :overflow "hidden"
                        :left (n->px (- item-radius))
                        :bottom (n->px (- item-radius))
-                       :background-image (str "url('" item "')")
+                       :background-image (when url (str "url('" url "')"))
                        :background-size "contain"
                        :background-repeat "no-repeat"
                        :background-position "center"

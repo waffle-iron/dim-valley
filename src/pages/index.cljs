@@ -31,7 +31,10 @@
         :min-height "100vh"}
 
   (menu.flower/menu
-   ["milly.png" "dave.png" "octocat.png" "find-documents.svg"]
+   [{:url "milly.png"}
+    {:url "dave.png"}
+    {:url "octocat.png"}
+    {:text "dim valley"}]
    200)
 
   (layout.middle-right/middle-right
