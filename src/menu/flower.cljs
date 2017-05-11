@@ -75,19 +75,36 @@
    (h/div
     :css {:z-index 0}
     (h/for-tpl [[i [x y] item] i-xy-item]
-     (h/div
-      :css (j/cell= (merge
-                     {:position "absolute"
-                      :left (n->px (- item-radius))
-                      :bottom (n->px (- item-radius))
-                      :background-color "white"
-                      :width (* 2 item-radius)
-                      :height (* 2 item-radius)
-                      :border-radius (n->px item-radius)
-                      :transition (let [transition-delay (if open?
-                                                          (* i base-transition-length)
-                                                          0)]
-                                   (str "transform " total-transition-length "s ease " transition-delay "s"))
-                      :cursor "pointer"}
-                     {:transform (if open? (str "translate(" x "px, " y "px)")
-                                           "translate(0, 0)")}))))))))
+     (let [transition-delay (j/cell= (if open?
+                                      (* i base-transition-length)
+                                      0))]
+      (h/div
+       (h/div
+        :css (j/cell= {
+                       :position "absolute"
+                       :background-color "white"
+                       :top 0
+                       :left 0
+                       :bottom 0
+                       :right 0
+                       :transition (str "opacity " total-transition-length "s ease " transition-delay "s")
+                       :opacity (if open? 0 1)}))
+
+       :css (j/cell= (merge
+                      {
+                       :position "absolute"
+                       :overflow "hidden"
+                       :left (n->px (- item-radius))
+                       :bottom (n->px (- item-radius))
+                       :background-image (str "url('" item "')")
+                       :background-size "contain"
+                       :background-repeat "no-repeat"
+                       :background-position "center"
+                       :background-color "white"
+                       :width (* 2 item-radius)
+                       :height (* 2 item-radius)
+                       :border-radius (n->px item-radius)
+                       :transition (str "transform " total-transition-length "s ease " transition-delay "s")
+                       :cursor "pointer"}
+                      {:transform (if open? (str "translate(" x "px, " y "px)")
+                                            "translate(0, 0)")})))))))))

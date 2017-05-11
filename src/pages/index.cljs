@@ -31,7 +31,7 @@
         :min-height "100vh"}
 
   (menu.flower/menu
-   (range 8)
+   ["milly.png" "dave.png" "octocat.png" "find-documents.svg"]
    200)
 
   (layout.middle-right/middle-right
