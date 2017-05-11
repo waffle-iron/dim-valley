@@ -30,7 +30,7 @@
    :css {:margin "5vh 0 0 5vw"
          :padding "5vh 0 5vh 5vw"
          :background-color "white"
-         :border-width "5px"
+         :border-width "4px"
          :border-style "dotted"
          :border-color (first gradient-stops)
          :border-image-source "url('/border-dots.svg')"
