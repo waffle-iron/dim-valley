@@ -48,7 +48,7 @@
       :css (merge
             {:margin "2.67rem 0"}
             (fonts.hoplon/font-map->css-map fonts.config/playfair))
-      (h/h1 "Dim valley pty. ltd."
+      (h/h1 "dim valley pty. ltd."
        :css {:margin 0
              :font-size "4rem"})
       (h/span "Modern business services."
