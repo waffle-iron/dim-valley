@@ -3,11 +3,10 @@
   [hoplon.core :as h]
   [javelin.core :as j]))
 
-; Based on https://codepen.io/jordanlachance/pen/yOJdRr
+; Hoplonified from https://codepen.io/jordanlachance/pen/yOJdRr
 
 (defn polar->cartesian
  [radius radians]
- (prn radius radians)
  [(* radius (.cos js/Math radians))
   (* radius (.sin js/Math radians))])
 
@@ -18,11 +17,17 @@
  (let [open? (or open? (j/cell false))]
   (h/div
    :click #(swap! open? not)
-   :css (j/cell= {:width radius
-                  :height radius
+   :css (j/cell= {; We give a couple px buffer to avoid antialiasing artefacts
+                  ; when the circles are stacked in the z-axis.
+                  :width (+ radius 2)
+                  :height (+ radius 2)
                   :background-color "white"
-                  :border-radius (n->px radius)})
-   "X")))
+                  :border-radius (n->px radius)
+                  :position "absolute"
+                  :left "-1px"
+                  :top "-2px"
+                  :z-index 1
+                  :cursor "pointer"}))))
 
 (defn menu
  [items width]
@@ -44,19 +49,29 @@
                     [i
                      (polar->cartesian offset (* i radians-per-item))
                      item])
-                   items))]
+                   items))
+       total-transition-length 0.6
+       base-transition-length (j/cell= (/ total-transition-length (count items)))]
   (h/div
-   :css {:position "relative"}
+   :css {:position "relative"
+         :z-index 1}
    (open-button open? radius)
-   (h/when-tpl open?
-    (h/div
-     (h/for-tpl [[i [x y] item] i-xy-item]
-      (h/div item
-       :css (j/cell= {:transform (str "translate(" x "px, " y "px)")
-                      :position "absolute"
+   (h/div
+    :css {:z-index 0}
+    (h/for-tpl [[i [x y] item] i-xy-item]
+     (h/div
+      :css (j/cell= (merge
+                     {:position "absolute"
                       :left 0
                       :top 0
                       :background-color "white"
                       :width radius
                       :height radius
-                      :border-radius (n->px radius)}))))))))
+                      :border-radius (n->px radius)
+                      :transition (let [transition-delay (if open?
+                                                          (* i base-transition-length)
+                                                          0)]
+                                   (str "transform " total-transition-length "s ease " transition-delay "s"))
+                      :cursor "pointer"}
+                     {:transform (if open? (str "translate(" x "px, " y "px)")
+                                           "translate(0, 0)")}))))))))

@@ -2,6 +2,7 @@
  (:require
   colours.ui-gradients
   [hoplon.core :as h]
+  [javelin.core :as j]
   hoplon.jquery
   fonts.config
   fonts.hoplon
@@ -29,14 +30,15 @@
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " gradient-stops) ")")
         :min-height "100vh"}
 
-  (let [width 200]
+  (let [diameter 200]
    (h/div
-    :css {:position "fixed"
-          :top "200px"
-          :left "200px"}
+    :css (j/cell= {:position "fixed"
+                   :bottom (str "calc(5vh + " (/ diameter 2) "px)")
+                   :left (str "calc(5vw + " (/ diameter 2) "px")
+                   :overflow "visible"})
     (menu.flower/menu
      ["A" "B" "C" "D" "E" "F"]
-     width)))
+     diameter)))
 
   (layout.middle-right/middle-right
    (h/div
