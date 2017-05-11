@@ -29,13 +29,13 @@
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " gradient-stops) ")")
         :min-height "100vh"}
 
-  (let [width 100]
+  (let [width 200]
    (h/div
     :css {:position "fixed"
           :top "200px"
           :left "200px"}
     (menu.flower/menu
-     ["A" "B" "C" "D" "E"]
+     ["A" "B" "C" "D" "E" "F"]
      width)))
 
   (layout.middle-right/middle-right
