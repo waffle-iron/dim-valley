@@ -7,7 +7,8 @@
   colours.ui-gradients
   menu.config))
 
-; Hoplonified from https://codepen.io/jordanlachance/pen/yOJdRr
+; Loosely based on https://codepen.io/jordanlachance/pen/yOJdRr but heavily
+; reworked and Hoplonified :)
 
 (def big-scale 1.3)
 
