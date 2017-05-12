@@ -32,7 +32,9 @@
  (h/body
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops)) ")")
         :color (last (colours.ui-gradients/stops))
-        :min-height "100vh"}
+        :min-height "100vh"
+        :width "100vw"
+        :overflow-x "hidden"}
 
   (let [routes [{:text "dim valley pty. ltd." :f pages.dim-valley/content}
                 {:text "legal" :f pages.legal/content}
@@ -57,7 +59,7 @@
       (h/for-tpl [route routes]
        (menu.drawers/drawer
         (j/cell= (= route current-route))
-        "90vw"
+        "calc(75vw + 4px)"
 
         (layout.content-block/content-outer
          (h/div
