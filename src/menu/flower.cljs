@@ -99,7 +99,7 @@
                      (when open? {:background-color "white"}))))]))))
 
 (defn menu
- [items radius]
+ [current-item items radius]
  (let [open? (j/cell false)
        button-hover? (j/cell false)
 
@@ -153,7 +153,9 @@
        (h/div
         :mouseenter #(reset! mouseover? true)
         :mouseleave #(reset! mouseover? false)
-        :click #(reset! open? false)
+        :click #(j/dosync
+                 (reset! current-item @item)
+                 (reset! open? false))
         :css (j/cell= {:transition (str "transform " (/ total-transition-length 2) "s " easing)
                        :transform (str "scale(" (if (and mouseover? open?) 1.1 1) ")")
                        :width (* 2 item-radius)

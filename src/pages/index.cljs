@@ -39,7 +39,7 @@
                 {:url "dave.png" :f pages.dave/content}
                 {:url "milly.png" :f pages.milly/content}]
         current-route (let [c (j/cell nil)
-                            route-in-routes? (fn [r rs] (some? (first (filter #(= r %) rs))))]
+                            route-in-routes? (fn [r rs] (filter #(= r %) rs))]
                        (j/cell=
                         (if (route-in-routes? c routes)
                          c
@@ -47,12 +47,15 @@
                         #(reset! c %)))]
    [
     (menu.flower/menu
+     current-route
      routes
      200)
 
     (layout.middle-right/middle-right
      (h/for-tpl [route routes]
-      (layout.content-block/content-outer
-       (h/div
-        {:css {:width "cacl(60vw - 4px)"}}
-        (h/div (j/cell= ((:f route))))))))])))
+      (h/div
+       :toggle (j/cell= (= route current-route))
+       (layout.content-block/content-outer
+        (h/div
+         {:css {:width "cacl(60vw - 4px)"}}
+         (h/div (j/cell= ((:f route)))))))))])))
