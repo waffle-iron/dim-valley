@@ -52,4 +52,7 @@
 
     (layout.middle-right/middle-right
      (h/for-tpl [route routes]
-      (h/div (j/cell= ((:f route))))))])))
+      (layout.content-block/content-outer
+       (h/div
+        {:css {:width "cacl(60vw - 4px)"}}
+        (h/div (j/cell= ((:f route))))))))])))

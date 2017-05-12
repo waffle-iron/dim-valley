@@ -19,4 +19,5 @@
  (h/div
   :css {:padding-left layout.config/spacer-width
         :background-color "white"}
+  :class "clearfix"
   children))

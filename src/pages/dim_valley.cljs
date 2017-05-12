@@ -1,6 +1,8 @@
 (ns pages.dim-valley
  (:require
-  [hoplon.core :as h]))
+  [hoplon.core :as h]
+  layout.content-block))
 
 (defn content []
- (h/div "Dim valley"))
+ (layout.content-block/content-inner
+  (h/div "Dim valley")))

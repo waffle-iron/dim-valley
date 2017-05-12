@@ -1,6 +1,8 @@
 (ns pages.github
  (:require
-  [hoplon.core :as h]))
+  [hoplon.core :as h]
+  layout.content-block))
 
 (defn content []
- (h/div "github"))
+ (layout.content-block/content-inner
+  (h/div "github")))
