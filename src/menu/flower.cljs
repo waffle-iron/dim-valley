@@ -142,7 +142,6 @@
            url (j/cell= (:url item))
            text (j/cell= (:text item))
            mouseover? (j/cell false)]
-      (j/cell= (prn url text mouseover?))
 
       (h/div
        :css (j/cell= (merge
