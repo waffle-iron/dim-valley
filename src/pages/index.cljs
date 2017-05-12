@@ -11,6 +11,7 @@
   layout.spacer
   layout.middle-right
   menu.flower
+  menu.drawers
   pages.milly
   pages.dim-valley
   pages.legal
@@ -52,10 +53,13 @@
      200)
 
     (layout.middle-right/middle-right
-     (h/for-tpl [route routes]
-      (h/div
-       :toggle (j/cell= (= route current-route))
-       (layout.content-block/content-outer
-        (h/div
-         {:css {:width "cacl(60vw - 4px)"}}
-         (h/div (j/cell= ((:f route)))))))))])))
+     (menu.drawers/drawers
+      (h/for-tpl [route routes]
+       (menu.drawers/drawer
+        (j/cell= (= route current-route))
+        "90vw"
+
+        (layout.content-block/content-outer
+         (h/div
+          {:css {:width "cacl(60vw - 4px)"}}
+          (h/div (j/cell= ((:f route))))))))))])))
