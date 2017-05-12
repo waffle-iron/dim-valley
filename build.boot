@@ -18,7 +18,8 @@
   '[hoplon.boot-hoplon       :refer [hoplon prerender]]
   '[tailrecursion.boot-jetty :refer [serve]])
 
-(let [compiler-options {}]
+(let [compiler-options {:foreign-libs [{:file "https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.js"
+                                        :provides ["lib.mapbox"]}]}]
 
  (deftask front-dev
   "Build for local development."
