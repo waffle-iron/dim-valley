@@ -1,10 +1,29 @@
 (ns pages.dim-valley
  (:require
   [hoplon.core :as h]
+  [javelin.core :as j]
+  colours.ui-gradients
   layout.header-block
   layout.content-block
   mapbox.dom
-  mapbox.api))
+  mapbox.api
+  [unit.conversion :as u]))
+
+(defn dv-marker [width]
+ (let [base-css (j/cell= {:width (u/n->px width)
+                          :height (u/n->px (/ width 6))
+                          :background-color colours.ui-gradients/base-colour})]
+  (h/div
+   ;line 1
+   (h/div
+    :css (j/cell= (merge base-css
+                         {:transform "rotate(45deg)"})))
+
+   (h/div
+    :css (j/cell= (merge base-css
+                         {:transform "rotate(-45deg)"}))))))
+
+  ; line 2
 
 (defn dv-map
  []
@@ -18,7 +37,7 @@
                                 :height "300px"
                                 :margin "4px 0"}
                           :options options
-                          :marker (h/div "fooooo"))]
+                          :marker (dv-marker 20))]
   el))
 
 

@@ -16,3 +16,5 @@
      (filter #(= name (get % "name")))
      first)
     "colors"))))
+
+(def base-colour (last (stops)))
