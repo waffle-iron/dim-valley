@@ -1,3 +1,16 @@
+(ns styles.core
+ (:require
+  [hoplon.core :as h])
+ (:require-macros
+  macros.slurp))
+
+(defn normalize [] (macros.slurp/slurp "https://necolas.github.io/normalize.css/latest/normalize.css"))
+
+(defn style []
+ (h/style
+  [
+   (normalize)
+   (str "
 * {
   box-sizing: border-box;
 }
@@ -22,3 +35,8 @@ img {
   display: table;
   clear: both;
 }
+
+a {
+ color: " colours.ui-gradients/secondary-colour ";
+}
+")]))

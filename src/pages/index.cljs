@@ -17,6 +17,7 @@
   pages.legal
   pages.github
   pages.dave
+  styles.core
   mapbox.dom))
 
 (h/html
@@ -26,10 +27,7 @@
    :rel "stylesheet"
    :type "text/css")
   (fonts.google-fonts/fonts fonts.config/fonts)
-  (h/link
-   :href "app.css"
-   :rel "stylesheet"
-   :type "text/css")
+  (styles.core/style)
   (mapbox.dom/stylesheet))
  (h/body
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops)) ")")

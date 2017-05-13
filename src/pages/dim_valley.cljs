@@ -8,7 +8,8 @@
   mapbox.dom
   mapbox.api
   [unit.conversion :as u]
-  wheel.math.geometry))
+  wheel.math.geometry
+  wheel.hoplon.abn.dom))
 
 (defn dv-marker [width]
 
@@ -55,7 +56,7 @@
  [
   (layout.header-block/header
    "Dim valley pty. ltd."
-   ["A.B.N. 38 617 641 595"
+   ["A.B.N. " (wheel.hoplon.abn.dom/abn "38 617 641 595")
     (h/br)
     "Modern business services"])
   (dv-map)
