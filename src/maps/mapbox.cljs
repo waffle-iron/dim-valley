@@ -13,12 +13,18 @@
 (defn assets []
  (h/link :href "https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.css" :rel "stylesheet"))
 
-(defn map-el [& {:keys [width height style]}]
+(defn map-el [& {:keys [width height center marker options]}]
  (let [id (random-uuid)
-       options {"container" (str id)
-                "style" style}]
+       options (merge {"container" (str id)
+                       "center" center}
+                      options)]
   (j/with-let [el (h/div :id id
                          :css (j/cell= {:width width
                                         :height height}))]
    (h/with-dom el
-    (js/mapboxgl.Map. (clj->js options))))))
+    (let [map (js/mapboxgl.Map. (clj->js options))
+          [lng lat] center
+          lng-lat (js/mapboxgl.LngLat. lng lat)
+          marker (doto (js/mapboxgl.Marker. marker)
+                       (.setLngLat lng-lat)
+                       (.addTo map))])))))
