@@ -32,7 +32,7 @@ img {
 }
 
 .clearfix:after, .clearfix:before {
-  content: "";
+  content: \"\";
   display: table;
   clear: both;
 }
