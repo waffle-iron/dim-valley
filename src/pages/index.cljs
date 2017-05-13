@@ -16,7 +16,8 @@
   pages.dim-valley
   pages.legal
   pages.github
-  pages.dave))
+  pages.dave
+  mapbox.dom))
 
 (h/html
  (h/head
@@ -28,7 +29,8 @@
   (h/link
    :href "app.css"
    :rel "stylesheet"
-   :type "text/css"))
+   :type "text/css")
+  (mapbox.dom/stylesheet))
  (h/body
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops)) ")")
         :color (last (colours.ui-gradients/stops))
