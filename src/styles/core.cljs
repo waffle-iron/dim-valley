@@ -19,6 +19,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Raleway', sans-serif;
+    color: " colours.ui-gradients/base-colour ";
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -31,7 +31,6 @@
   (mapbox.dom/stylesheet))
  (h/body
   :css {:background (str "linear-gradient(to left, " (clojure.string/join ", " (colours.ui-gradients/stops)) ")")
-        :color (last (colours.ui-gradients/stops))
         :min-height "100vh"
         :width "100vw"
         :overflow-x "hidden"}
