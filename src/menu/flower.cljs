@@ -6,17 +6,13 @@
   fonts.config
   colours.ui-gradients
   menu.config
-  [unit.conversion :as u]))
+  [unit.conversion :as u]
+  math.geometry))
 
 ; Loosely based on https://codepen.io/jordanlachance/pen/yOJdRr but heavily
 ; reworked and Hoplonified :)
 
 (def big-scale 1.3)
-
-(defn polar->cartesian
- [radius radians]
- [(* radius (.cos js/Math radians))
-  (* radius (.sin js/Math radians))])
 
 (defn outer-wrapper
  [outer-radius open? button-hover? transition-length & children]
@@ -59,7 +55,7 @@
          ; sin(PI/4) = rotated-offset / width
          ; rotated-offset = (width x sin(PI /4))
          rotated-offset (j/cell= (/ (* width
-                                       (.sin js/Math (/ (.-PI js/Math) 4)))
+                                       (.sin js/Math (math.geometry/degrees->radians 45)))
                                     2))
          height (j/cell= (/ radius 12))
          ; rotated-offset (j/cell= (* 2 width))
@@ -122,7 +118,7 @@
                   (map-indexed
                    (fn [i item]
                     [i
-                     (polar->cartesian offset (* i radians-per-item))
+                     (math.geometry/polar->cartesian offset (* i radians-per-item))
                      item])
                    items))
        total-transition-length menu.config/transition-length

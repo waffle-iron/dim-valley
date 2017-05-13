@@ -29,9 +29,9 @@
 
 (defn with-marker!
  "Given a map container DOM element, a marker element and a long/lat, add the marker to the map"
- [map-el marker-el ll]
+ [map-el marker-el ll marker-options]
  (h/with-dom map-el
-  (doto (js/mapboxgl.Marker. marker-el)
+  (doto (js/mapboxgl.Marker. marker-el (clj->js marker-options))
         (.setLngLat ll)
         (.addTo (map-el->map map-el)))))
 

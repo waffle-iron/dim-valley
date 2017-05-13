@@ -7,27 +7,36 @@
   layout.content-block
   mapbox.dom
   mapbox.api
-  [unit.conversion :as u]))
+  [unit.conversion :as u]
+  math.geometry))
 
 (defn dv-marker [width]
- (let [base-css (j/cell= {:width (u/n->px width)
+
+ (let [; cos(45) = marker-width / line-length
+       ; line-length = marker-width / cos(45)
+       line-length (j/cell= (/ width (.cos js/Math (math.geometry/degrees->radians 45))))
+       base-css (j/cell= {:width (u/n->px line-length)
                           :height (u/n->px (/ width 6))
-                          :background-color colours.ui-gradients/base-colour})]
+                          :background-color colours.ui-gradients/base-colour
+                          :position "absolute"
+                          :top 0
+                          :left 0})]
   (h/div
+   :css {:position "relative"}
    ;line 1
    (h/div
     :css (j/cell= (merge base-css
                          {:transform "rotate(45deg)"})))
 
+   ; line 2
    (h/div
     :css (j/cell= (merge base-css
                          {:transform "rotate(-45deg)"}))))))
 
-  ; line 2
-
 (defn dv-map
  []
  (let [ll (mapbox.api/lng-lat 144.995415 -37.826018)
+       marker-width 20
        options {"center" ll
                 "style" "mapbox://styles/thedavidmeister/cj2ll9ozt00282rqny3ozjigd"
                 "zoom" 13
@@ -37,7 +46,8 @@
                                 :height "300px"
                                 :margin "4px 0"}
                           :options options
-                          :marker (dv-marker 20))]
+                          :marker (dv-marker marker-width)
+                          :marker-options {:offset (map (comp - #(/ % 2)) [marker-width marker-width])})]
   el))
 
 
