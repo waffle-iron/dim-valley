@@ -8,13 +8,13 @@
   mapbox.dom
   mapbox.api
   [unit.conversion :as u]
-  math.geometry))
+  wheel.math.geometry))
 
 (defn dv-marker [width]
 
  (let [; cos(45) = marker-width / line-length
        ; line-length = marker-width / cos(45)
-       line-length (j/cell= (/ width (.cos js/Math (math.geometry/degrees->radians 45))))
+       line-length (j/cell= (/ width (.cos js/Math (wheel.math.geometry/degrees->radians 45))))
        base-css (j/cell= {:width (u/n->px line-length)
                           :height (u/n->px (/ width 6))
                           :background-color colours.ui-gradients/base-colour
