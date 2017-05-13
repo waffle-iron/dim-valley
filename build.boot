@@ -7,7 +7,8 @@
                   [org.clojure/clojurescript "1.9.293"]
                   [tailrecursion/boot-jetty  "0.1.3"]
                   [camel-snake-kebab "0.4.0"]
-                  [cljsjs/js-yaml "3.3.1-0"]]
+                  [cljsjs/js-yaml "3.3.1-0"]
+                  [wheel "0.1.0-SNAPSHOT"]]
 
   :source-paths #{"src"}
   :asset-paths  #{"assets"})

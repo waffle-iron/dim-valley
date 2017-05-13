@@ -7,7 +7,7 @@
   colours.ui-gradients
   menu.config
   [unit.conversion :as u]
-  math.geometry))
+  wheel.math.geometry))
 
 ; Loosely based on https://codepen.io/jordanlachance/pen/yOJdRr but heavily
 ; reworked and Hoplonified :)
@@ -55,7 +55,7 @@
          ; sin(PI/4) = rotated-offset / width
          ; rotated-offset = (width x sin(PI /4))
          rotated-offset (j/cell= (/ (* width
-                                       (.sin js/Math (math.geometry/degrees->radians 45)))
+                                       (.sin js/Math (wheel.math.geometry/degrees->radians 45)))
                                     2))
          height (j/cell= (/ radius 12))
          ; rotated-offset (j/cell= (* 2 width))
@@ -118,7 +118,7 @@
                   (map-indexed
                    (fn [i item]
                     [i
-                     (math.geometry/polar->cartesian offset (* i radians-per-item))
+                     (wheel.math.geometry/polar->cartesian offset (* i radians-per-item))
                      item])
                    items))
        total-transition-length menu.config/transition-length
