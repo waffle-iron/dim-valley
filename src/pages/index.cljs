@@ -22,10 +22,6 @@
 
 (h/html
  (h/head
-  (h/link
-   :href "https://necolas.github.io/normalize.css/latest/normalize.css"
-   :rel "stylesheet"
-   :type "text/css")
   (fonts.google-fonts/fonts fonts.config/fonts)
   (styles.core/style)
   (mapbox.dom/stylesheet))
