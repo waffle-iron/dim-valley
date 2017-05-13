@@ -39,4 +39,8 @@ img {
 a {
  color: " colours.ui-gradients/secondary-colour ";
 }
+
+a:hover {
+ color: black;
+}
 ")]))
