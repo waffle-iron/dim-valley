@@ -6,6 +6,7 @@
                :fallback "serif"})
 
 (def raleway {:name "Raleway"
+              :variants ["400" "700"]
               :fallback "sans-serif"})
 
 (def fonts [playfair raleway])
