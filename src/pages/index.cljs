@@ -5,8 +5,7 @@
   [javelin.core :as j]
   hoplon.jquery
   fonts.config
-  fonts.hoplon
-  fonts.google-fonts
+  wheel.hoplon.google-fonts.dom
   layout.config
   layout.spacer
   layout.middle-right
@@ -22,7 +21,7 @@
 
 (h/html
  (h/head
-  (fonts.google-fonts/fonts fonts.config/fonts)
+  (wheel.hoplon.google-fonts.dom/link fonts.config/fonts)
   (styles.core/style)
   (mapbox.dom/stylesheet))
  (h/body

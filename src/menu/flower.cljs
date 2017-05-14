@@ -2,12 +2,12 @@
  (:require
   [hoplon.core :as h]
   [javelin.core :as j]
-  fonts.hoplon
   fonts.config
   colours.ui-gradients
   menu.config
   [unit.conversion :as u]
-  wheel.math.geometry))
+  wheel.math.geometry
+  wheel.hoplon.google-fonts.api))
 
 ; Loosely based on https://codepen.io/jordanlachance/pen/yOJdRr but heavily
 ; reworked and Hoplonified :)
@@ -184,7 +184,7 @@
             :valign "center"
             :css (merge
                   {:text-align "center"}
-                  (fonts.hoplon/font-map->css-map fonts.config/playfair))
+                  (wheel.hoplon.google-fonts.api/font->css-map fonts.config/playfair))
             text))))
 
         (h/div

@@ -4,11 +4,11 @@
                   [hoplon/javelin            "3.9.0"]
                   [hoplon/hoplon             "7.0.1"]
                   [org.clojure/clojure       "1.8.0"]
-                  [org.clojure/clojurescript "1.9.293"]
+                  [org.clojure/clojurescript "1.9.542"]
                   [tailrecursion/boot-jetty  "0.1.3"]
                   [camel-snake-kebab "0.4.0"]
                   [cljsjs/js-yaml "3.3.1-0"]
-                  [wheel "0.1.0-SNAPSHOT"]]
+                  [thedavidmeister/wheel "0.1.0-SNAPSHOT"]]
 
   :source-paths #{"src"}
   :asset-paths  #{"assets"})
