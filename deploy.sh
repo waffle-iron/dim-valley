@@ -1,4 +1,5 @@
 #!/bin/sh
+git pull;
 boot gh-pages;
 git add .;
 git commit -am "Deploy to github pages";
