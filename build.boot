@@ -21,7 +21,8 @@
   '[tailrecursion.boot-jetty :refer [serve]])
 
 (let [compiler-options {:foreign-libs [{:file "https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.js"
-                                        :provides ["lib.mapbox"]}]}]
+                                        :provides ["lib.mapbox"]}]
+                        :externs ["externs.js"]}]
 
  (deftask front-dev
   "Build for local development."
@@ -39,5 +40,7 @@
   []
   (comp
    (hoplon)
-   (cljs :compiler-options compiler-options)
+   (cljs
+    :optimizations :advanced
+    :compiler-options compiler-options)
    (target :dir #{"gh-pages"}))))
