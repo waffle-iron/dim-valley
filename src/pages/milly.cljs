@@ -2,10 +2,17 @@
  (:require
   [hoplon.core :as h]
   layout.content-block
-  layout.header-block))
+  layout.header-block
+  image.hoplon))
 
 (defn content []
  [
+  (image.hoplon/cropped
+   :src "https://s3-ap-southeast-2.amazonaws.com/dim-valley-public/C8DGQUCVYAABgc-.jpg"
+   :width "100%"
+   :height "400px"
+   :css {:margin-bottom "4px"})
+
   (layout.header-block/header
    "Amelia Schmidt (Milly)"
    "I believe modern businesses should consciously develop and evolve their unique model in a way that, over time, the needs of the business and customer naturally become one and the same.")
@@ -15,11 +22,6 @@
    (h/a (h/img :src "github.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://github.com/meelijane/")
    (h/a (h/img :src "medium.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://medium.com/@meeli/")
    (h/a (h/img :src "twitter.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://twitter.com/meelijane/"))
-
-  (h/img
-   :src "https://s3-ap-southeast-2.amazonaws.com/dim-valley-public/C8DGQUCVYAABgc-.jpg"
-   :css {:width "100%"
-         :margin "4px 0"})
 
   (layout.content-block/content-inner
    (h/h2 "What I do")
