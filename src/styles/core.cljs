@@ -33,6 +33,10 @@ img {
 
 svg {
  fill: " colours.ui-gradients/base-colour ";
+ fill-rule:evenodd;
+ clip-rule:evenodd;
+ stroke-linejoin:round;
+ stroke-miterlimit:1.41421;
 }
 
 .clearfix:after, .clearfix:before {
@@ -47,9 +51,5 @@ a {
 
 a:hover {
  color: black;
-}
-
-a svg {
- fill: " colours.ui-gradients/secondary-colour ";
 }
 ")]))
