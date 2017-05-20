@@ -5,7 +5,7 @@
   layout.header-block
   layout.spacer
   image.hoplon
-  icon.hoplon
+  social.hoplon
   wheel.link.hoplon))
 
 (defn content []
@@ -18,14 +18,11 @@
 
   (layout.content-block/content-inner
    (layout.spacer/vertical-spacer)
-   (for [[f h] [[icon.hoplon/linkedin "https://www.linkedin.com/in/ameliaschmidt/"]
-                [icon.hoplon/github "https://github.com/meelijane/"]
-                [icon.hoplon/medium "https://medium.com/@meeli/"]
-                [icon.hoplon/twitter "https://twitter.com/meelijane/"]]]
-    (h/div
-     ; 12px = 1/2 width of 1 icon.
-     :css {:margin-right "12px"}
-     (wheel.link.hoplon/external h (f)))))
+   (social.hoplon/icon-links
+    :linkedin "https://www.linkedin.com/in/ameliaschmidt/"
+    :github "https://github.com/meelijane/"
+    :medium "https://medium.com/@meeli/"
+    :twitter "https://twitter.com/meelijane/"))
 
   (layout.header-block/header
    "Amelia Schmidt (Milly)"

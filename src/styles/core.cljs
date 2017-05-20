@@ -39,6 +39,10 @@ svg {
  stroke-miterlimit:1.41421;
 }
 
+svg:hover {
+ fill: black;
+}
+
 .clearfix:after, .clearfix:before {
   content: \"\";
   display: table;
