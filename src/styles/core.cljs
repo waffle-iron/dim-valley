@@ -2,9 +2,9 @@
  (:require
   [hoplon.core :as h])
  (:require-macros
-  macros.slurp))
+  wheel.slurp.core))
 
-(defn normalize [] (macros.slurp/slurp "https://necolas.github.io/normalize.css/latest/normalize.css"))
+(defn normalize [] (wheel.slurp.core/slurp "https://necolas.github.io/normalize.css/latest/normalize.css"))
 
 (defn style []
  (h/style
