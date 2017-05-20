@@ -3,7 +3,8 @@
   [hoplon.core :as h]
   layout.content-block
   layout.header-block
-  image.hoplon))
+  image.hoplon
+  icon.hoplon))
 
 (defn content []
  [
@@ -19,7 +20,7 @@
 
   (layout.content-block/content-inner
    (h/a (h/img :src "linkedin.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://www.linkedin.com/in/ameliaschmidt/")
-   (h/a (h/img :src "github.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://github.com/meelijane/")
+   (h/a (icon.hoplon/github) :href "https://github.com/meelijane/")
    (h/a (h/img :src "medium.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://medium.com/@meeli/")
    (h/a (h/img :src "twitter.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://twitter.com/meelijane/"))
 
