@@ -47,8 +47,8 @@
                 "interactive" false
                 "logoPosition" "bottom-right"}
        el (mapbox.dom/map :css {:width "100%"
-                                :height "300px"
-                                :margin "4px 0"}
+                                :height "400px"
+                                :margin-bottom "4px"}
                           :options options
                           :marker (dv-marker marker-width)
                           :marker-options {:offset (map (comp - #(/ % 2)) [marker-width marker-width])})]
@@ -56,6 +56,7 @@
 
 (defn content []
  [
+  (dv-map)
   (layout.header-block/header
    "Dim valley pty. ltd."
    ["A.B.N. " (wheel.abn.hoplon/abn "38 617 641 595")
@@ -64,6 +65,5 @@
   (layout.content-block/content-inner
    (wheel.address.hoplon/simple address.config/address)
    (layout.spacer/vertical-spacer))
-  (dv-map)
   (layout.content-block/content-inner
    "Lorem ipsum")])

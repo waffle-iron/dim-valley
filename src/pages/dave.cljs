@@ -2,10 +2,17 @@
  (:require
   [hoplon.core :as h]
   layout.content-block
-  layout.header-block))
+  layout.header-block
+  image.hoplon))
 
 (defn content []
  [
+  (image.hoplon/cropped
+   :src "https://s3-ap-southeast-2.amazonaws.com/dim-valley-public/dave-photo.jpg"
+   :width "100%"
+   :height "400px"
+   :css {:margin-bottom "4px"})
+
   (layout.header-block/header
    "David Meister (Dave)"
    [
@@ -25,11 +32,6 @@
     (h/br)
     (h/strong "I am available for ad-hoc contract work,") " where the weekly commitment is less than full-time.")
    (layout.spacer/vertical-spacer))
-
-  (h/img
-   :src "https://s3-ap-southeast-2.amazonaws.com/dim-valley-public/dave-photo.jpg"
-   :css {:width "100%"}
-   :margin "4px 0")
 
   (layout.content-block/content-inner
    (h/h2 "What I do")
