@@ -13,6 +13,14 @@
    :height "400px"
    :css {:margin-bottom "4px"})
 
+  (layout.content-block/content-inner
+   (layout.spacer/vertical-spacer)
+   (social.hoplon/icon-links
+    :linkedin "https://www.linkedin.com/in/dmeister/"
+    :github "https://github.com/thedavidmeister"
+    :medium "https://medium.com/@thedavidmeister"
+    :twitter "https://twitter.com/thedavidmeister"))
+
   (layout.header-block/header
    "David Meister (Dave)"
    [
@@ -22,8 +30,7 @@
      (h/br)
      "Bad design always loses its momentum in the end.")
     (h/p
-     "I love the process of building large systems from composable, rock-solid smaller parts.")
-    (h/a (h/img :src "github.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://github.com/thedavidmeister/")])
+     "I love the process of building large systems from composable, rock-solid smaller parts.")])
 
   (layout.content-block/content-inner
    (h/h2 "Availability")

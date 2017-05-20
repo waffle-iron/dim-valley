@@ -31,6 +31,18 @@ img {
   display: block;
 }
 
+svg {
+ fill: " colours.ui-gradients/base-colour ";
+ fill-rule:evenodd;
+ clip-rule:evenodd;
+ stroke-linejoin:round;
+ stroke-miterlimit:1.41421;
+}
+
+svg:hover {
+ fill: black;
+}
+
 .clearfix:after, .clearfix:before {
   content: \"\";
   display: table;

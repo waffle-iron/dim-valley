@@ -3,7 +3,10 @@
   [hoplon.core :as h]
   layout.content-block
   layout.header-block
-  image.hoplon))
+  layout.spacer
+  image.hoplon
+  social.hoplon
+  wheel.link.hoplon))
 
 (defn content []
  [
@@ -13,15 +16,17 @@
    :height "400px"
    :css {:margin-bottom "4px"})
 
+  (layout.content-block/content-inner
+   (layout.spacer/vertical-spacer)
+   (social.hoplon/icon-links
+    :linkedin "https://www.linkedin.com/in/ameliaschmidt/"
+    :github "https://github.com/meelijane/"
+    :medium "https://medium.com/@meeli/"
+    :twitter "https://twitter.com/meelijane/"))
+
   (layout.header-block/header
    "Amelia Schmidt (Milly)"
    "I believe modern businesses should consciously develop and evolve their unique model in a way that, over time, the needs of the business and customer naturally become one and the same.")
-
-  (layout.content-block/content-inner
-   (h/a (h/img :src "linkedin.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://www.linkedin.com/in/ameliaschmidt/")
-   (h/a (h/img :src "github.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://github.com/meelijane/")
-   (h/a (h/img :src "medium.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://medium.com/@meeli/")
-   (h/a (h/img :src "twitter.svg" :css {:width "30px" :display "inline-block" :margin-right "10px"}) :href "https://twitter.com/meelijane/"))
 
   (layout.content-block/content-inner
    (h/h2 "What I do")
