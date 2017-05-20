@@ -31,6 +31,10 @@ img {
   display: block;
 }
 
+svg {
+ fill: " colours.ui-gradients/base-colour ";
+}
+
 .clearfix:after, .clearfix:before {
   content: \"\";
   display: table;
@@ -43,5 +47,9 @@ a {
 
 a:hover {
  color: black;
+}
+
+a svg {
+ fill: " colours.ui-gradients/secondary-colour ";
 }
 ")]))
