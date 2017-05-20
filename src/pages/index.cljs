@@ -32,7 +32,7 @@
 
   (let [routes [{:text "dim valley pty. ltd." :f pages.dim-valley/content}
                 {:text "legal" :f pages.legal/content}
-                {:url "octocat.png" :f pages.github/content}
+                {:url "octocat.jpg" :f pages.github/content}
                 {:url "dave.png" :f pages.dave/content}
                 {:url "milly.png" :f pages.milly/content}]
         current-route (let [c (j/cell nil)
