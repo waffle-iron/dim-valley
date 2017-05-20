@@ -2,7 +2,7 @@
  (:require
   camel-snake-kebab.core
   colours.config)
- (:require-macros macros.slurp))
+ (:require-macros wheel.slurp.core))
 
 (defn stops
  ([] (stops colours.config/gradient-name))
@@ -10,7 +10,7 @@
   (let [parse (.-parse js/JSON)]
    (get
     (some->>
-     (macros.slurp/slurp "https://raw.githubusercontent.com/ghosh/uiGradients/master/gradients.json")
+     (wheel.slurp.core/slurp "https://raw.githubusercontent.com/ghosh/uiGradients/master/gradients.json")
      parse
      js->clj
      (filter #(= name (get % "name")))
