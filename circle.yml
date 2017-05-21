@@ -30,9 +30,9 @@ test:
     # Nothing to run here
     - echo 1
 
-# deployment:
-#   # Push snapshots of master through to clojars
-#   snapshot:
-#     branch: master
-#     commands:
-#       - boot build-jar push-snapshot
+deployment:
+  # Push snapshots of master through to github
+  github:
+    branch: master
+    commands:
+      - . deploy.sh
