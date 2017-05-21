@@ -30,32 +30,24 @@
         :width "100vw"
         :overflow-x "hidden"}
 
-  (let [routes [{:text "dim valley pty. ltd." :f pages.dim-valley/content :handler :contact}
-                {:text "legal" :f pages.legal/content :handler :legal}
-                {:url "octocat.jpg" :f pages.github/content :handler :github}
-                {:url "dave.png" :f pages.dave/content :handler :dave}
-                {:url "milly.png" :f pages.milly/content :handler :milly}]
-        current-route (let [c (j/cell nil)
-                            route-in-routes? (fn [r rs] (some? (first (filter #(= r %) rs))))]
-                       (j/cell=
-                        (if (route-in-routes? c routes)
-                         c
-                         (first routes))
-                        #(reset! c %)))]
+  (let [items [{:text "dim valley pty. ltd." :f pages.dim-valley/content :handler :contact}
+               {:text "legal" :f pages.legal/content :handler :legal}
+               {:url "octocat.jpg" :f pages.github/content :handler :github}
+               {:url "dave.png" :f pages.dave/content :handler :dave}
+               {:url "milly.png" :f pages.milly/content :handler :milly}]]
    [
     (menu.flower/menu
-     current-route
-     routes
+     items
      200)
 
     (layout.middle-right/middle-right
      (menu.drawers/drawers
-      (h/for-tpl [route routes]
+      (h/for-tpl [item items]
        (menu.drawers/drawer
-        (j/cell= (= route current-route))
+        (j/cell= (= route.state/history (wheel.route.core/bidi->path route.config/routes (:handler item))))
         "calc(75vw + 4px)"
 
         (layout.content-block/content-outer
          (h/div
           {:css {:width "cacl(60vw - 4px)"}}
-          (h/div (j/cell= ((:f route))))))))))])))
+          (h/div (j/cell= ((:f item))))))))))])))

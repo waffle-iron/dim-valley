@@ -100,7 +100,7 @@
                      (when open? {:background-color "white"}))))]))))
 
 (defn menu
- [current-item items radius]
+ [items radius]
  (let [open? (j/cell false)
        button-hover? (j/cell false)
 
