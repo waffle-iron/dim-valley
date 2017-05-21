@@ -30,11 +30,11 @@
         :width "100vw"
         :overflow-x "hidden"}
 
-  (let [routes [{:text "dim valley pty. ltd." :f pages.dim-valley/content}
-                {:text "legal" :f pages.legal/content}
-                {:url "octocat.jpg" :f pages.github/content}
-                {:url "dave.png" :f pages.dave/content}
-                {:url "milly.png" :f pages.milly/content}]
+  (let [routes [{:text "dim valley pty. ltd." :f pages.dim-valley/content :handler :contact}
+                {:text "legal" :f pages.legal/content :handler :legal}
+                {:url "octocat.jpg" :f pages.github/content :handler :github}
+                {:url "dave.png" :f pages.dave/content :handler :dave}
+                {:url "milly.png" :f pages.milly/content :handler :milly}]
         current-route (let [c (j/cell nil)
                             route-in-routes? (fn [r rs] (some? (first (filter #(= r %) rs))))]
                        (j/cell=
