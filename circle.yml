@@ -35,4 +35,6 @@ deployment:
   github:
     branch: master
     commands:
+      - git config --global user.email "thedavidmeister@gmail.com"
+      - git config --global user.name "Circle CI"
       - . deploy.sh
