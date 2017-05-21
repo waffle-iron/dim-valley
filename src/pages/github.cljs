@@ -5,4 +5,4 @@
 
 (defn content []
  (layout.content-block/content-inner
-  (h/div "github")))
+  (h/h1 "github")))

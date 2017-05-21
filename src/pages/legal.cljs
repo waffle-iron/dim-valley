@@ -5,4 +5,4 @@
 
 (defn content []
  (layout.content-block/content-inner
-  (h/div "legal")))
+  (h/h1 "legal")))
