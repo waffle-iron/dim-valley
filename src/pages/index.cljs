@@ -44,7 +44,7 @@
      (menu.drawers/drawers
       (h/for-tpl [item items]
        (menu.drawers/drawer
-        (j/cell= (= (wheel.route.core/path->bidi route.state/history route.config/routes :contact)
+        (j/cell= (= (wheel.route.core/path->bidi route.state/history route.config/routes route.config/fallback-handler)
                     (select-keys item [:handler])))
         "calc(75vw + 4px)"
 

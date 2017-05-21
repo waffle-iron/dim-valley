@@ -9,3 +9,5 @@
       "contact" :contact}])
 
 (assert (wheel.route.core/routes? routes))
+
+(def fallback-handler :contact)
