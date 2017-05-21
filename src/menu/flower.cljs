@@ -7,7 +7,8 @@
   menu.config
   [unit.conversion :as u]
   wheel.math.geometry
-  wheel.font.core))
+  wheel.font.core
+  route.hoplon))
 
 ; Loosely based on https://codepen.io/jordanlachance/pen/yOJdRr but heavily
 ; reworked and Hoplonified :)
@@ -99,7 +100,7 @@
                      (when open? {:background-color "white"}))))]))))
 
 (defn menu
- [current-item items radius]
+ [items radius]
  (let [open? (j/cell false)
        button-hover? (j/cell false)
 
@@ -141,8 +142,11 @@
                                       0))
            url (j/cell= (:url item))
            text (j/cell= (:text item))
-           mouseover? (j/cell false)]
+           handler (j/cell= (:handler item))
+           mouseover? (j/cell false)
+           interacting? (j/cell= (and mouseover? open?))]
 
+      ; Outer div handles the cartesian offsets for the petal.
       (h/div
        :css (j/cell= (merge
                       {
@@ -150,50 +154,56 @@
                       {:transform (if open? (str "translate(" x "px, " y "px)")
                                             "translate(0, 0)")}))
 
-       (h/div
-        :mouseenter #(reset! mouseover? true)
-        :mouseleave #(reset! mouseover? false)
-        :click #(j/dosync
-                 (reset! current-item @item)
-                 (reset! open? false))
-        :css (j/cell= {:transition (str "transform " (/ total-transition-length 2) "s " menu.config/easing)
-                       :transform (str "scale(" (if (and mouseover? open?) big-scale 1) ")")
-                       :width (* 2 item-radius)
-                       :height (* 2 item-radius)
-                       :border-radius (u/n->px item-radius)
-                       :border "4px solid"
-                       :background-image (when url (str "url('" url "')"))
-                       :background-size "contain"
-                       :background-repeat "no-repeat"
-                       :background-position "center"
-                       :background-color "white"
-                       :position "absolute"
-                       :overflow "hidden"
-                       :left (u/n->px (- item-radius))
-                       :bottom (u/n->px (- item-radius))
-                       :cursor "pointer"})
+       (route.hoplon/link
+        :handler handler
+        :css (j/cell= {:color (if interacting? "black" colours.ui-gradients/base-colour)})
 
-
-        (h/when-tpl text
-         (h/table
-          :css {:position "absolute"
-                :width "100%"
-                :height "100%"}
-          (h/tr
-           (h/td
-            :valign "center"
-            :css (merge
-                  {:text-align "center"}
-                  (wheel.font.core/font->css-map fonts.config/playfair))
-            text))))
-
+        ; Inner div handles interations with the petal.
         (h/div
-         :css (j/cell= {
-                        :position "absolute"
+         :mouseenter #(reset! mouseover? true)
+         :mouseleave #(reset! mouseover? false)
+         :click #(j/dosync
+                  (reset! open? false)
+                  ; Return true to ensure click bubbles to the route link.
+                  true)
+         :css (j/cell= {:transition (str "transform " (/ total-transition-length 2) "s " menu.config/easing)
+                        :transform (str "scale(" (if interacting? big-scale 1) ")")
+                        :width (* 2 item-radius)
+                        :height (* 2 item-radius)
+                        :border-radius (u/n->px item-radius)
+                        :border "4px solid"
+                        :background-image (when url (str "url('" url "')"))
+                        :background-size "contain"
+                        :background-repeat "no-repeat"
+                        :background-position "center"
                         :background-color "white"
-                        :top 0
-                        :left 0
-                        :bottom 0
-                        :right 0
-                        :transition (str "opacity " total-transition-length "s " menu.config/easing " " transition-delay "s")
-                        :opacity (if open? 0 1)}))))))))))
+                        :position "absolute"
+                        :overflow "hidden"
+                        :left (u/n->px (- item-radius))
+                        :bottom (u/n->px (- item-radius))
+                        :cursor "pointer"})
+
+
+         (h/when-tpl text
+          (h/table
+           :css {:position "absolute"
+                 :width "100%"
+                 :height "100%"}
+           (h/tr
+            (h/td
+             :valign "center"
+             :css (merge
+                   {:text-align "center"}
+                   (wheel.font.core/font->css-map fonts.config/playfair))
+             text))))
+
+         (h/div
+          :css (j/cell= {
+                         :position "absolute"
+                         :background-color "white"
+                         :top 0
+                         :left 0
+                         :bottom 0
+                         :right 0
+                         :transition (str "opacity " total-transition-length "s " menu.config/easing " " transition-delay "s")
+                         :opacity (if open? 0 1)})))))))))))
