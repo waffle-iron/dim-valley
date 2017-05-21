@@ -143,7 +143,8 @@
            url (j/cell= (:url item))
            text (j/cell= (:text item))
            handler (j/cell= (:handler item))
-           mouseover? (j/cell false)]
+           mouseover? (j/cell false)
+           interacting? (j/cell= (and mouseover? open?))]
 
       ; Outer div handles the cartesian offsets for the petal.
       (h/div
@@ -155,14 +156,18 @@
 
        (route.hoplon/link
         :handler handler
+        :css (j/cell= {:color (if interacting? "black" colours.ui-gradients/base-colour)})
 
         ; Inner div handles interations with the petal.
         (h/div
          :mouseenter #(reset! mouseover? true)
          :mouseleave #(reset! mouseover? false)
-         :click #(do (reset! open? false) true)
+         :click #(j/dosync
+                  (reset! open? false)
+                  ; Return true to ensure click bubbles to the route link.
+                  true)
          :css (j/cell= {:transition (str "transform " (/ total-transition-length 2) "s " menu.config/easing)
-                        :transform (str "scale(" (if (and mouseover? open?) big-scale 1) ")")
+                        :transform (str "scale(" (if interacting? big-scale 1) ")")
                         :width (* 2 item-radius)
                         :height (* 2 item-radius)
                         :border-radius (u/n->px item-radius)
