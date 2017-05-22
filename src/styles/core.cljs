@@ -56,4 +56,13 @@ a {
 a:hover {
  color: black;
 }
+
+ul {
+ padding-left: 0;
+}
+
+ul li {
+ list-style-type: circle;
+ margin: 1em 0;
+}
 ")]))
