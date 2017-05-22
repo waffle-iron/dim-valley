@@ -85,7 +85,7 @@
    (layout.body-text/p
     "1 hour = $AUD 120 + GST"
     (h/br)
-    "1 day = $AUD 800 + GST"))
+    "1 day (prebooked) = $AUD 800 + GST"))
 
   (layout.content-block/content-inner
    (h/h2 "Case studies")
