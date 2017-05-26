@@ -17,7 +17,8 @@
   pages.github
   pages.dave
   styles.core
-  mapbox.dom))
+  mapbox.dom
+  wheel.resize-observer.hoplon))
 
 (h/html
  (h/head
@@ -41,14 +42,23 @@
      200)
 
     (layout.middle-right/middle-right
-     (menu.drawers/drawers
-      (h/for-tpl [item items]
-       (menu.drawers/drawer
-        (j/cell= (= (wheel.route.core/path->bidi route.state/history route.config/routes route.config/fallback-handler)
-                    (select-keys item [:handler])))
-        "calc(75vw + 4px)"
 
-        (layout.content-block/content-outer
-         (h/div
-          {:css {:width "cacl(60vw - 4px)"}}
-          (h/div (j/cell= ((:f item))))))))))])))
+     ; Measure width for responsive content.
+     (let [measured-width (j/cell 0)]
+      (wheel.resize-observer.hoplon/div
+       :width measured-width
+
+       (menu.drawers/drawers
+        (h/for-tpl [item items]
+         (menu.drawers/drawer
+          (j/cell= (= (wheel.route.core/path->bidi route.state/history route.config/routes route.config/fallback-handler)
+                      (select-keys item [:handler])))
+          "calc(75vw + 4px)"
+
+          (layout.content-block/content-outer
+           (h/div
+            {:css {:width "cacl(60vw - 4px)"}}
+            (h/div
+             (j/cell=
+              ((:f item)
+               :measured-width measured-width)))))))))))])))

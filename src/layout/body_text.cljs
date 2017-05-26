@@ -3,10 +3,10 @@
   [hoplon.core :as h]))
 
 (h/defelem p
- [attributes children]
+ [{:keys [css measured-width] :as attributes} children]
  (h/p
-  :css (merge {:width "66%"
-               :max-width "600px"}
-              (:css attributes))
-  (dissoc attributes :css)
+  :css (j/cell= (merge {:width (if (< 600 measured-width) "66%" "100%")
+                        :max-width "600px"}
+                       css))
+  (dissoc attributes :css :measured-width)
   children))
